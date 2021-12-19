@@ -17,9 +17,11 @@
 ## (Comments)
 #Sample Feature Definition Template
 
+@Registration @1.0
 Feature: Registration Functionality
 New user will be able to register to the application.
 
+@EndToEnd @Regression @DataDriven
 Scenario Outline: Positive registration functionality test
 Given user is in homepage
 When user clicks Register link
@@ -32,3 +34,13 @@ Examples:
 |FirstName|LastName|Country|Username|Password|ConfirmPassword|
 |Tommy|Hank|UNITED STATES|tm12|123|123|
 |Marry|Night|AUSTRALIA|mn12|123|123|
+
+@EndToEnd @Regression
+Scenario: Positive registration functionality test
+Given user is in homepage
+When user clicks Register link
+And user doesn't provide any required data 
+And clicks submit button
+Then user should not be able to register
+And user should be able to see error message
+

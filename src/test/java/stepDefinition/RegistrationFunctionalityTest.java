@@ -38,4 +38,28 @@ public class RegistrationFunctionalityTest extends Main{
 	   Assert.assertEquals(actualSuccessMsg, expectedSuccessMsg);
 	}
 
+	@And("user doesn't provide any required data")
+	public void user_doesn_t_provide_any_required_data() {
+		driver.findElement(By.name("firstName")).clear();
+		 driver.findElement(By.name("lastName")).clear();
+		 Select select = new Select(driver.findElement(By.name("country")));
+		 select.selectByIndex(0);;
+		 
+		 driver.findElement(By.name("email")).clear();
+		 driver.findElement(By.name("password")).clear();
+		 driver.findElement(By.name("confirmPassword")).clear(); 
+	}
+	@Then("user should not be able to register")
+	public void user_should_not_be_able_to_register() {
+	    Assert.assertEquals(driver.getTitle(), "Register : Mercury Tours");
+	}
+	@And("user should be able to see error message")
+	public void user_should_be_able_to_see_error_message() {
+	    Assert.assertTrue(driver.findElement(By.xpath(
+	    		"//font[text()='Enter values in required fields.']")).isDisplayed());
+	}
+
+
+
+
 }
